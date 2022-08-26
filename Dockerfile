@@ -14,12 +14,12 @@ RUN set -xe \
     && apt clean \
     && rm -rf /var/lib/apt/lists/* 
 
-ADD Miniconda3-latest-Linux-x86_64.sh miniconda.sh
+ADD Miniconda3-latest-Linux-x86_64.sh /miniconda.sh
 
 RUN set -xe \
     \
-    && ./miniconda.sh -b -p /opt/conda \
-    && conda init bash
+    && chmod 700 /miniconda.sh \
+    && /bin/bash /miniconda.sh -b -p /opt/conda
 
 ADD stable-diffusion-main.tar.gz /
 ADD generate.py /
