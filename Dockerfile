@@ -15,14 +15,15 @@ RUN set -xe \
     && rm -rf /var/lib/apt/lists/* 
 
 ADD Miniconda3-latest-Linux-x86_64.sh /miniconda.sh
+ADD stable-diffusion-main.tar.gz /
+ADD generate.py /
+ADD entry.sh /
 
 RUN set -xe \
     \
     && chmod 700 /miniconda.sh \
+    && chmod 700 /generate.py \
+    && chmod 700 /entry.sh \
     && /bin/bash /miniconda.sh -b -p /opt/conda
-
-ADD stable-diffusion-main.tar.gz /
-ADD generate.py /
-ADD entry.sh /
 
 ENTRYPOINT [ "/entry.sh" ]
