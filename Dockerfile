@@ -14,16 +14,19 @@ RUN set -xe \
     && apt clean \
     && rm -rf /var/lib/apt/lists/* 
 
-ADD Miniconda3-latest-Linux-x86_64.sh /miniconda.sh
 ADD stable-diffusion-main.tar.gz /
-ADD generate.py /
-ADD entry.sh /
 
+ADD Miniconda3-latest-Linux-x86_64.sh /miniconda.sh
 RUN set -xe \
     \
     && chmod 700 /miniconda.sh \
-    && chmod 700 /generate.py \
-    && chmod 700 /entry.sh \
     && /bin/bash /miniconda.sh -b -p /opt/conda
+
+ADD entry.sh /
+ADD generate.py /
+RUN set -xe \
+    \
+    && chmod 700 /generate.py \
+    && chmod 700 /entry.sh 
 
 ENTRYPOINT [ "/entry.sh" ]

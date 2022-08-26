@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ $# -ne 2 ]; then
+if [ $# -lt 2 ]; then
   echo "実行するには2個の引数が必要です。" 1>&2
   echo "画像精製用の文字列 huggingfaceのトークン" 1>&2
   exit 1
@@ -24,4 +24,10 @@ echo "prompt=> $1"
 echo "token=> $2"
 echo "画像の生成を開始します"
 
-python /generate.py "$1" "$2"
+if [ $# -eq 3 ]; then
+    n=$3
+else
+    n=4
+fi
+
+python /generate.py "$1" "$2" $n
