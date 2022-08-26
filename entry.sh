@@ -24,4 +24,4 @@ echo "prompt=> $1"
 echo "token=> $2"
 echo "画像の生成を開始します"
 
-python /generate.py $1 $2
+python /generate.py "$1" "$2"
